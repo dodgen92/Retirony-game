@@ -1,2 +1,2 @@
 # Retirony-game
-A very late submission for the 2022 Game Jam 
+A very late submission for Github's 2022 Game Off
