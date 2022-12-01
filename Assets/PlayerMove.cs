@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PlayerMove : MonoBehaviour
 {
@@ -8,6 +10,7 @@ public class PlayerMove : MonoBehaviour
     public float moveSpeed;
     public Rigidbody2D rb;
     public Weapon weapon;
+ 
 
 
     private Vector2 moveDirection;
@@ -48,5 +51,25 @@ public class PlayerMove : MonoBehaviour
         //calculates angle
         float aimAngle = Mathf.Atan2(aimDirection.y, aimDirection.x) * Mathf.Rad2Deg - 90f;
         rb.rotation = aimAngle;
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+
+
+        if (collision.gameObject.TryGetComponent<Enemy>(out Enemy enemyComponent))
+        {
+            Destroy(gameObject);
+
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        }
+
+        if (collision.gameObject.TryGetComponent<enemyBoss>(out enemyBoss enemyBossComponent))
+        {
+            Destroy(gameObject);
+
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        }
+
     }
 }
